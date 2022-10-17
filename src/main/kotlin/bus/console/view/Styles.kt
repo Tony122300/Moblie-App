@@ -14,7 +14,7 @@ class Styles : Stylesheet() {
         label {
             padding = box(10.px)
             fontSize = 15.px
-            fontWeight = FontWeight.BOLD
+            fontWeight = FontWeight.MEDIUM
         }
     }
 }
