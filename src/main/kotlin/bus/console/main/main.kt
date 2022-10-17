@@ -1,11 +1,11 @@
 package bus.console.main
 import mu.KotlinLogging
 import bus.console.models.BusModel
-
 private val logger = KotlinLogging.logger {}
 val buses = ArrayList<BusModel>()
 var bus = BusModel()
 fun main(args: Array<String>) {
+    
     println("bus app")
 
     var input: Int
@@ -81,5 +81,5 @@ fun addBus(){
 fun searchBusByRoute(){
     println("Searching bus by route Number")
     println()
-
+    
 }
