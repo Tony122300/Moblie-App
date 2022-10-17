@@ -1,12 +1,12 @@
 package bus.console.main
-
+import mu.KotlinLogging
 import bus.console.models.BusModel
 
-
-//val buses = ArrayList<BusModel>()
+private val logger = KotlinLogging.logger {}
+val buses = ArrayList<BusModel>()
 var bus = BusModel()
 fun main(args: Array<String>) {
-    println("Placemark Kotlin App Version 1.0")
+    println("bus app")
 
     var input: Int
 
@@ -53,8 +53,7 @@ fun menu() : Int {
 
 fun listBusRoutes(){
     println("list of bus routes")
-    println(bus.route)
-    println(bus.destination)
+    buses.forEach { logger.info("${it}") }
 }
 
 
@@ -72,7 +71,11 @@ fun addBus(){
     bus.timeLeave = Integer.valueOf(readLine())
     print("Enter bus time of arrival")
     bus.timeArrive = Integer.valueOf(readLine())
-    println("you entered: " + "Bus route = " + bus.route + " origin = " + bus.origin + "destination = " + bus.destination + "arrival = " + bus.timeArrive + "leave = " + bus.timeLeave)
+    if(bus.route !=null && bus.origin.isNotEmpty() && bus.destination.isNotEmpty() && bus.timeArrive != null && bus.timeLeave != null){
+        buses.add(bus.copy())
+
+
+    }
 }
 
 fun searchBusByRoute(){
