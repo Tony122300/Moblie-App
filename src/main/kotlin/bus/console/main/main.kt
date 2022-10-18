@@ -1,6 +1,10 @@
 package bus.console.main
 import mu.KotlinLogging
 import bus.console.models.BusModel
+import bus.console.Database.Database
+import kotlin.time.Duration.Companion.hours
+import kotlin.time.hours
+
 private val logger = KotlinLogging.logger {}
 val buses = ArrayList<BusModel>()
 var bus = BusModel()
@@ -18,8 +22,9 @@ fun main(args: Array<String>) {
             2 -> println("find bus by origin and destination")
             3 -> println("Buy ticket")
             4 -> searchBusByRoute()
-            5 -> listBusRoutes()
+            5 -> println(listBuses())
             6 -> println("find timetable")
+            7 -> deleteBus()
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
         }
@@ -27,6 +32,8 @@ fun main(args: Array<String>) {
     } while (input != -1)
     println("Shutting Down bus app Console App" )
 }
+
+
 
 fun menu() : Int {
 
@@ -51,31 +58,54 @@ fun menu() : Int {
     return option
 }
 
-fun listBusRoutes(){
-    println("list of bus routes")
-    buses.forEach { logger.info("${it}") }
+fun listBuses():List<BusModel>{
+    val conn = Database().conn
+    val resultSet = conn.createStatement().executeQuery("SELECT `BusID`, `Route`, `Origin`, `Destination`, `Departuretime`, `arrivaltime` FROM `businfo` WHERE 1")
+    val busModels = ArrayList<BusModel>()
+    while(resultSet.next()){
+        val BusID = resultSet.getInt("busID")
+        val Route = resultSet.getInt("Route")
+        val Origin = resultSet.getString("Origin")
+        val Destination = resultSet.getString("Destination")
+        val Departuretime = resultSet.getInt("Departuretime")
+        val arrivaltime = resultSet.getInt("arrivaltime")
+        val bus = BusModel(BusID,Route,Origin,Destination,Departuretime,arrivaltime)
+        busModels.add(bus)
+    }
+    resultSet.close()
+    conn.close()
+    return busModels
 }
 
-
-
 fun addBus(){
-    println("add bus")
+    val conn = Database().conn
+     println("add bus")
     println()
+    print("Enter busID")
+    bus.BusID = Integer.valueOf(readLine())
     print("Enter bus route")
-    bus.route = Integer.valueOf(readLine())
+    bus.Route = Integer.valueOf(readLine())
     print("Enter bus origin")
-    bus.origin = readLine()!!
+    bus.Origin = readLine()!!
     print("Enter bus destination")
-    bus.destination = readLine()!!
+    bus.Destination = readLine()!!
     print("Enter bus time of departure")
-    bus.timeLeave = Integer.valueOf(readLine())
+    bus.Departuretime = Integer.valueOf(readLine())
     print("Enter bus time of arrival")
-    bus.timeArrive = Integer.valueOf(readLine())
-    if(bus.route !=null && bus.origin.isNotEmpty() && bus.destination.isNotEmpty() && bus.timeArrive != null && bus.timeLeave != null){
-        buses.add(bus.copy())
+    bus.arrivaltime = Integer.valueOf(readLine())
 
+    if(bus.Route !=null && bus.Origin.isNotEmpty() && bus.Destination.isNotEmpty() && bus.Departuretime != null && bus.arrivaltime != null){
+        val ps = conn.prepareStatement("INSERT INTO `businfo`(`BusID`, `Route`, `Origin`, `Destination`, `Departuretime`, `arrivaltime`) " +
+                "values (${bus.BusID},${bus.Route},'${bus.Origin}','${bus.Destination}',${bus.Departuretime},${bus.arrivaltime})")
+        ps.executeUpdate()
+        ps.close()
+        conn.close()
 
     }
+}
+
+fun deleteBus(){
+
 }
 
 fun searchBusByRoute(){

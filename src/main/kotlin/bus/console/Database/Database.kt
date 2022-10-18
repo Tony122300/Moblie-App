@@ -3,13 +3,21 @@ import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
 
-    object Test {
-        fun connection() {
+class Database {
+    var conn: Connection
+
+    init {
+        Class.forName("com.mysql.cj.jdbc.Driver")
+        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bus-app", "root", "")
+    }
+    /*  fun connection() {
             try {
-                val conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/test_create_db", "root", "")
+                val conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bus-app", "root", "")
                 println("ok")
             } catch (e: SQLException) {
                 e.printStackTrace()
             }
         }
     }
+       */
+}

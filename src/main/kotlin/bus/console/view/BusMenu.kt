@@ -9,6 +9,7 @@ class BusMenu : View("Bus Menu") {
             button("Add bus") {
                 spacing = 8.00
                 setOnAction {
+
                 }
             }
 
