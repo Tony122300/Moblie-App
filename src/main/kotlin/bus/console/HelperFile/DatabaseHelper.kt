@@ -5,6 +5,7 @@ import bus.console.main.bus
 import bus.console.models.BusModel
 
 class DatabaseHelper {
+    // just storing it here
     fun addBus(Bus: BusModel){
         val conn = Database().conn
         if(bus.Route !=null && bus.Origin.isNotEmpty() && bus.Destination.isNotEmpty() && bus.Departuretime != null && bus.arrivaltime != null) {
