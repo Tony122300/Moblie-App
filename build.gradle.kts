@@ -11,7 +11,7 @@ javafx {
 
 
 
-group = "food.review.app"
+group = "bus.app"
 version = "1.0-SNAPSHOT"
 
 repositories {
