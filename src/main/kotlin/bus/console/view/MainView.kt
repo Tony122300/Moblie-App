@@ -4,10 +4,16 @@ import tornadofx.*
 
 class MainView : View("Bus App") {
     override val root: BorderPane = borderpane {
-        label(title)
-            top {
+       left = vbox (80){
+            label("Bus menu")
 
+            button("Add bus"){
+                action{
+                    replaceWith<AddBus>()
+                }
             }
+        }
+
     }
 }
 

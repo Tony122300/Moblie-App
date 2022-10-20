@@ -79,8 +79,14 @@ fun listBuses():List<BusModel>{
     return busModels
 }
 
+/*
+fun addBus(BusID: Int, Route: Int, Origin: String, Destination:String, Departuretime: Int, arrivaltime: Int){
+    val busObject = BusModel(BusID, Route,Origin,Destination, Departuretime, arrivaltime)
+    buses.add(busObject)
+}
+*/
 fun addBus(){
-    val conn = Database().conn
+   // val conn = Database().conn
      println("add bus")
     println()
     print("Enter busID")
@@ -95,7 +101,7 @@ fun addBus(){
     bus.Departuretime = Integer.valueOf(readLine())
     print("Enter bus time of arrival")
     bus.arrivaltime = Integer.valueOf(readLine())
-
+/*
     if(bus.Route !=null && bus.Origin.isNotEmpty() && bus.Destination.isNotEmpty() && bus.Departuretime != null && bus.arrivaltime != null){
         val ps = conn.prepareStatement("INSERT INTO `businfo`(`BusID`, `Route`, `Origin`, `Destination`, `Departuretime`, `arrivaltime`) " +
                 "values (${bus.BusID},${bus.Route},'${bus.Origin}','${bus.Destination}',${bus.Departuretime},${bus.arrivaltime})")
@@ -104,6 +110,8 @@ fun addBus(){
         conn.close()
 
     }
+
+ */
 }
 fun deleteBus(bus: BusModel){
     val conn = Database().conn
@@ -146,4 +154,8 @@ fun searchBusByRoute():List<BusModel> {
     ps.close()
     conn.close()
     return busModels
+}
+
+fun updateBus(){
+
 }
