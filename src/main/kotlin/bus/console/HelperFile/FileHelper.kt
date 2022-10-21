@@ -1,44 +1,69 @@
 package bus.console.HelperFile
+import bus.console.Database.Database
+import bus.console.main.bus
+import bus.console.models.BusModel
 import mu.KotlinLogging
 import java.io.*
 
 val logger = KotlinLogging.logger {}
 
-fun write( fileName: String, data: String) {
+fun write( bus:BusModel) {
 
-    val file = File(fileName)
+  //  val file = File(fileName)
     try {
-        val outputStreamWriter = OutputStreamWriter(FileOutputStream(file))
-        outputStreamWriter.write(data)
-        outputStreamWriter.close()
+        val conn = Database().conn
+      //  val outputStreamWriter = OutputStreamWriter(FileOutputStream(file))
+      //  outputStreamWriter.write(data)
+        val ps = conn.prepareStatement(
+            "INSERT INTO `businfo`(`BusID`, `Route`, `Origin`, `Destination`, `Departuretime`, `arrivaltime`) " +
+                    "values (${bus.BusID},${bus.Route},'${bus.Origin}','${bus.Destination}',${bus.Departuretime},${bus.arrivaltime})"
+        )
+        ps.executeUpdate()
+        ps.close()
+        conn.close()
+      //  outputStreamWriter.close()
     } catch (e: Exception) {
         logger.error { "Cannot read file: " + e.toString() }
     }
 }
 
-fun read(fileName: String): String {
-    val file = File(fileName)
-    var str = ""
+fun read(): ArrayList<BusModel> {
     try {
-        val inputStreamReader = InputStreamReader(FileInputStream(file))
-        if (inputStreamReader != null) {
-            val bufferedReader = BufferedReader(inputStreamReader)
-            val partialStr = StringBuilder()
-            var done = false
-            while (!done) {
-                val line = bufferedReader.readLine()
-                done = (line == null);
-                if (line != null) partialStr.append(line);
-            }
-            inputStreamReader.close()
-            str = partialStr.toString()
+        val conn = Database().conn
+        val resultSet = conn.createStatement().executeQuery("SELECT `BusID`, `Route`, `Origin`, `Destination`, `Departuretime`, `arrivaltime` FROM `businfo` WHERE 1")
+        val busModels = ArrayList<BusModel>()
+        while(resultSet.next()){
+            val BusID = resultSet.getInt("busID")
+            val Route = resultSet.getInt("Route")
+            val Origin = resultSet.getString("Origin")
+            val Destination = resultSet.getString("Destination")
+            val Departuretime = resultSet.getInt("Departuretime")
+            val arrivaltime = resultSet.getInt("arrivaltime")
+            val bus = BusModel(BusID,Route,Origin,Destination,Departuretime,arrivaltime)
+            busModels.add(bus)
         }
+        resultSet.close()
+        conn.close()
+        return busModels
     } catch (e: FileNotFoundException) {
         logger.error { "Cannot Find file: " + e.toString() }
     } catch (e: IOException) {
         logger.error { "Cannot Read file: " + e.toString() }
     }
-    return str
+    return ArrayList()
+}
+
+fun deleteBus(bus: BusModel){
+    try{
+        val conn = Database().conn
+        val ps = conn.prepareStatement("delete from businfo where BusID = ?")
+        ps.setInt(1, bus.BusID)
+        ps.executeUpdate()
+        ps.close()
+        conn.close()
+    }catch (e: IOException){
+
+    }
 }
 
 fun exists(fileName: String): Boolean {

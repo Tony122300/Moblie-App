@@ -58,19 +58,12 @@ class AddBus : View("My View") {
                 action{
                     println(Destination.text)
                     if(IDInt.value != null && RouteInt.value != null && OriginString.value.toString() != null && DestinationString.value.toString() != null && DeparturetimeINT.value != null && arrivaltimeINT.value != null){
-                        val conn = Database().conn
                         bus.BusID= IDInt.value
                         bus.Route = RouteInt.value
                         bus.Origin = OriginString.value
                         bus.Destination = DestinationString.value
                         bus.Departuretime = DeparturetimeINT.value
                         bus.arrivaltime = arrivaltimeINT.value
-                      //  val conn = Database().conn
-                        val ps = conn.prepareStatement("INSERT INTO `businfo`(`BusID`, `Route`, `Origin`, `Destination`, `Departuretime`, `arrivaltime`) " +
-                                "values (${bus.BusID},${bus.Route},'${bus.Origin}','${bus.Destination}',${bus.Departuretime},${bus.arrivaltime})")
-                        ps.executeUpdate()
-                        ps.close()
-                        conn.close()
                     }
                 }
 

@@ -1,5 +1,6 @@
-package bus.console.models
+/*package bus.console.models
 
+import bus.console.HelperFile.exists
 import bus.console.HelperFile.logger
 import bus.console.HelperFile.read
 import bus.console.HelperFile.write
@@ -36,11 +37,11 @@ class BusJSONStore: BusStore {
     override fun create(bus: BusModel) {
         bus.BusID = generateRandomId()
         buses.add(bus)
-        serialize()
+        serialize(bus)
     }
     override fun delete(bus: BusModel) {
         buses.remove(bus)
-        serialize()
+     //   serialize()
     }
 
     override fun update(bus: BusModel) {
@@ -52,16 +53,16 @@ class BusJSONStore: BusStore {
             foundBus.Departuretime = bus.Departuretime
             foundBus.arrivaltime = bus.arrivaltime
         }
-        serialize()
+      //  serialize()
     }
 
     internal fun logAll() {
         buses.forEach { logger.info("${it}") }
     }
 
-    private fun serialize() {
-        val jsonString = gsonBuilder.toJson(buses, listType)
-        write(JSON_FILE, jsonString)
+    private fun serialize(bus:BusModel) {
+       // val jsonString = gsonBuilder.toJson(buses, listType)
+        write(bus)
     }
 
     private fun deserialize() {
@@ -69,3 +70,5 @@ class BusJSONStore: BusStore {
        // buses = read(BusModel)
     }
 }
+
+ */

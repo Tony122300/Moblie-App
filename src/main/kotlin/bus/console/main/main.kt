@@ -1,22 +1,29 @@
 package bus.console.main
+import bus.console.Controller.BusController
 import mu.KotlinLogging
 import bus.console.models.BusModel
 import bus.console.Database.Database
+import bus.console.models.BusMemStore
+import bus.console.views.BusView
 import java.sql.ResultSet
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.hours
 
+
 private val logger = KotlinLogging.logger {}
-val buses = ArrayList<BusModel>()
+//val buses = ArrayList<BusModel>()
+val buses = BusMemStore()
+val busView = BusView()
 var bus = BusModel()
 fun main(args: Array<String>) {
     
     println("bus app")
+    BusController().start()
 
     var input: Int
 
     do {
-        input = menu()
+        input = busView.menu()
         when(input) {
             0 -> addBus() //secret menu
             1 -> println("find bus by route")
@@ -25,7 +32,7 @@ fun main(args: Array<String>) {
             4 -> println(searchBusByRoute())
             5 -> println(listBuses())
             6 -> println("list timetable based on Route")
-            7 -> deleteBus(bus)
+            7 -> println("")
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
         }
@@ -35,7 +42,7 @@ fun main(args: Array<String>) {
 }
 
 
-
+/*
 fun menu() : Int {
 
     var option : Int
@@ -60,6 +67,8 @@ fun menu() : Int {
     return option
 }
 
+ */
+/*
 fun listBuses():List<BusModel>{
     val conn = Database().conn
     val resultSet = conn.createStatement().executeQuery("SELECT `BusID`, `Route`, `Origin`, `Destination`, `Departuretime`, `arrivaltime` FROM `businfo` WHERE 1")
@@ -79,6 +88,8 @@ fun listBuses():List<BusModel>{
     return busModels
 }
 
+ */
+
 /*
 fun addBus(BusID: Int, Route: Int, Origin: String, Destination:String, Departuretime: Int, arrivaltime: Int){
     val busObject = BusModel(BusID, Route,Origin,Destination, Departuretime, arrivaltime)
@@ -86,7 +97,7 @@ fun addBus(BusID: Int, Route: Int, Origin: String, Destination:String, Departure
 }
 */
 fun addBus(){
-   // val conn = Database().conn
+  /* // val conn = Database().conn
      println("add bus")
     println()
     print("Enter busID")
@@ -109,22 +120,26 @@ fun addBus(){
         ps.close()
         conn.close()
 
+   */
+
     }
 
  */
 }
+/*
 fun deleteBus(bus: BusModel){
     val conn = Database().conn
     println("delete bus")
     println()
     print("Enter busID")
-    bus.BusID = Integer.valueOf(readLine())
-    val ps = conn.prepareStatement("delete from businfo where BusID = ?")
-        ps.setInt(1, bus.BusID)
-        ps.executeUpdate()
-        ps.close()
-        conn.close()
+  val id = Integer.valueOf(readLine())
+    val theBus = buses.findOne(id)
+    if (theBus != null) {
+        buses.delete(theBus)
+    }
 }
+
+ */
 
 fun searchBusByRoute():List<BusModel> {
     val conn = Database().conn
@@ -159,3 +174,10 @@ fun searchBusByRoute():List<BusModel> {
 fun updateBus(){
 
 }
+
+fun listBuses(): List<BusModel>{
+  //  return buses.findAll()
+      return buses.findAll()
+
+
+  }
