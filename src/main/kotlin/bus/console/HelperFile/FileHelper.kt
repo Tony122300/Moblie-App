@@ -66,6 +66,32 @@ fun deleteBus(bus: BusModel){
     }
 }
 
+fun updateBus(bus: BusModel): Boolean {
+    try {
+        val conn = Database().conn
+        val stSQL = "UPDATE `businfo` " +
+                "SET `Route`='${bus.Route}',`Origin`='${bus.Origin}',`Destination`='${bus.Destination}'," +
+                "`Departuretime`='${bus.Departuretime}', `arrivaltime`='${bus.arrivaltime}' WHERE `BusID`= '${bus.BusID}'"
+        val ps =
+           /* conn.prepareStatement("UPDATE `businfo` " +
+                    "SET `Route`=[value-1],`Origin`='[value-2]',`Destination`='[value-3]'," +
+                    "`Departuretime`=[value-4],'arrivaltime`=[value-5] WHERE 'BusID'= ${bus.BusID}")*/
+        conn.prepareStatement(stSQL)
+
+      //  ps.setInt(1, bus.BusID)
+/*        ps.setInt(1, bus.Route)
+        ps.setString(2, bus.Origin)
+        ps.setString(3, bus.Destination)
+        ps.setInt(4, bus.Departuretime)
+        ps.setInt(5, bus.arrivaltime)*/
+        ps.executeUpdate()
+        ps.close()
+        conn.close()
+    }catch (e: IOException){
+
+    };return true
+}
+
 fun exists(fileName: String): Boolean {
     val file = File(fileName)
     return file.exists()

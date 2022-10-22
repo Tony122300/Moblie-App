@@ -49,13 +49,63 @@ fun addBusData(bus : BusModel) : Boolean {
 
     fun theBusesList(){
         //  return buses.findAll()
+        println("List All buses")
+        println()
+        buses.logAll()
+        println()
     }
 
     fun deleteBus(): Int{
         println("delete bus")
         println()
         print("Enter busID")
-        val id = Integer.valueOf(readLine())
-        return id
+        val busID = Integer.valueOf(readLine())
+        return busID
+    }
+
+    fun search(): Int{
+        println("Search bus by Route")
+        println()
+        print("search by Route")
+        val route = Integer.valueOf(readLine())
+        return route
+
+    }
+
+    fun updateBus(): BusModel? {
+        val newRoute: Int?
+        val newOrigin: String?
+        val newDestination: String?
+        val newDeparturetime: Int?
+        val newarrivaltime: Int?
+        val bus=BusModel()
+        println("Enter the BusID you want to update")
+        bus.BusID = Integer.valueOf(readLine())
+        println()
+
+        println("update bus")
+        println()
+        print("Enter route")
+        newRoute = Integer.valueOf(readLine())
+        print("Enter Origin")
+        newOrigin = readLine()
+        print("Enter Destination")
+        newDestination = readLine()
+        print("Enter Departuretime")
+        newDeparturetime = Integer.valueOf(readLine())
+        print("Enter arrivaltime")
+        newarrivaltime = Integer.valueOf(readLine())
+
+        if(newRoute != null && newOrigin != null && newDestination != null && newDeparturetime != null && newarrivaltime != null){
+            bus.Route = newRoute
+            bus.Origin = newOrigin
+            bus.Destination = newDestination
+            bus.Departuretime = newDeparturetime
+            bus.arrivaltime = newarrivaltime
+            return bus
+        }
+        return null
+
+
     }
 }

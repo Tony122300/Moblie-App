@@ -7,7 +7,6 @@ class Database {
     var conn: Connection
 
     init {
-        Class.forName("com.mysql.cj.jdbc.Driver")
         conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bus-app", "root", "")
     }
     /*  fun connection() {

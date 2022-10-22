@@ -5,7 +5,6 @@ import bus.console.models.BusModel
 import bus.console.Database.Database
 import bus.console.models.BusMemStore
 import bus.console.views.BusView
-import java.sql.ResultSet
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.hours
 
@@ -171,9 +170,7 @@ fun searchBusByRoute():List<BusModel> {
     return busModels
 }
 
-fun updateBus(){
 
-}
 
 fun listBuses(): List<BusModel>{
   //  return buses.findAll()

@@ -1,6 +1,5 @@
 package bus.console.Controller
 
-import bus.console.Database.Database
 import bus.console.main.*
 import bus.console.models.BusMemStore
 import bus.console.models.BusModel
@@ -19,7 +18,7 @@ class BusController {
                 0 -> addBus() //secret menu
                 1 -> println("find bus by route")
                 2 -> println("find bus by origin and destination")
-                3 -> println("Buy ticket")
+                3 -> updateBus()
                 4 -> println(searchBusByRoute())
                 5 -> listBuses()
                 6 -> println("list timetable based on Route")
@@ -73,5 +72,11 @@ class BusController {
         if (theBus != null) {
             buses.delete(theBus)
         }
+    }
+
+    fun updateBus(){
+        val busWithUpdates = busView.updateBus()
+        if(bus != null)
+            buses.update(busWithUpdates)
     }
 }
