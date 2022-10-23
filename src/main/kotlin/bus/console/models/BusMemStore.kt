@@ -75,7 +75,7 @@ class BusMemStore : BusStore {
     internal fun showallOriginToDestination(){
         val origin = mutableListOf<BusModel>()
         buses.forEach { origin.add(it)
-        println("origin : " + it.Origin + ", Destination : " + it.Destination )
+        println("origin : " + it.Origin + ", Destination : " + it.Destination + ", Route" + it.Route)
         }
         origin.sortWith(compareBy{it.BusID})
 
