@@ -19,7 +19,7 @@ class BusView {
         println(" 3. Update Bus ")
         println(" 4. Delete Bus")
         println(" 5. Sort by route smallest to largest")
-        println(" 6. ")
+        println(" 6. Filter show origin to destination and route")
         println("-1. Exit")
         println()
         print("Enter an integer : ")
@@ -101,4 +101,5 @@ fun addBusData(bus : BusModel) : Boolean {
         }
         return null
     }
+
 }

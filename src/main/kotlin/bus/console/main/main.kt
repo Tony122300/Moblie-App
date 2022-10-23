@@ -19,7 +19,6 @@ fun main(args: Array<String>) {
     println("bus app")
     BusController().start()
 
-/*
     /*
 fun menu() : Int {
 
@@ -44,6 +43,8 @@ fun menu() : Int {
         -9
     return option
 }
+
+
 
  */
     /*
@@ -74,6 +75,7 @@ fun addBus(BusID: Int, Route: Int, Origin: String, Destination:String, Departure
     buses.add(busObject)
 }
 */
+    /*
     fun addBus() {
         /* // val conn = Database().conn
      println("add bus")
@@ -102,8 +104,10 @@ fun addBus(BusID: Int, Route: Int, Origin: String, Destination:String, Departure
 
     }
 
+     */
+
  */
-    }
+
     /*
 fun deleteBus(bus: BusModel){
     val conn = Database().conn
@@ -118,10 +122,10 @@ fun deleteBus(bus: BusModel){
 }
 
  */
-
+/*
     fun searchBusByRoute(): List<BusModel> {
         val conn = Database().conn
-        println("Search bus by Route or Origin")
+        println("Search bus by Route")
         println()
         print("search by Route")
         bus.Route = Integer.valueOf(readLine()) //version1
@@ -134,8 +138,8 @@ fun deleteBus(bus: BusModel){
             val Route = resultSet.getInt("Route")
             val Origin = resultSet.getString("Origin")
             val Destination = resultSet.getString("Destination")
-            val Departuretime = resultSet.getInt("Departuretime")
-            val arrivaltime = resultSet.getInt("arrivaltime")
+            val Departuretime = resultSet.getDouble("Departuretime")
+            val arrivaltime = resultSet.getDouble("arrivaltime")
             val bus = BusModel(BusID, Route, Origin, Destination, Departuretime, arrivaltime)
             busModels.add(bus)
 
@@ -149,15 +153,6 @@ fun deleteBus(bus: BusModel){
         return busModels
     }
 
-
-    fun listBuses(): List<BusModel> {
-        //  return buses.findAll()
-        return buses.findAll()
-
-
-    }
-
- */
     /*
 fun searchBusByRoute(): List<BusModel> {
     val conn = Database().conn
@@ -190,5 +185,7 @@ fun searchBusByRoute(): List<BusModel> {
 }
 
      */
-}
+     2
+ */
 
+}

@@ -20,7 +20,7 @@ class BusController {
             when(input){
                 0 -> addBus()
                 1 -> listBuses()
-                2 -> searchBusByRoute()
+                2 -> println(searchBusByRoute())
                 3 -> updateBus()
                 4 -> deleteBus()
                 5 -> sort()
