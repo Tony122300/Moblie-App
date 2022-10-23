@@ -50,7 +50,7 @@ fun addBusData(bus : BusModel) : Boolean {
 }
 
     // listing the bus
-    fun theBusesList(){
+    fun theBusesList(buses : BusMemStore){
         //  return buses.findAll()
         println("List All buses")
         println()

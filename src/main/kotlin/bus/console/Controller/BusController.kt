@@ -42,7 +42,7 @@ class BusController {
     }
 // listing the bus
     fun listBuses(){
-        busView.theBusesList()
+        busView.theBusesList(buses)
     }
 
 
