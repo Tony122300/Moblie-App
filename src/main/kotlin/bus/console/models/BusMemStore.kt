@@ -13,6 +13,7 @@ private val logger = KotlinLogging.logger {}
 class BusMemStore : BusStore {
     var buses = ArrayList<BusModel>()
 
+
     override fun findAll(): List<BusModel> {
         return buses
     }
@@ -27,11 +28,13 @@ class BusMemStore : BusStore {
         write(bus)
         logAll()
     }
+    //deletes bus also calling delete bus from filehelper
     override fun delete(bus: BusModel) {
         buses.remove(bus)
         deleteBus(bus)
     }
 
+    //updating the bus if the busID is found also calling the update in file helper
     override fun update(bus: BusModel?) {
         val foundBus = findOne(bus?.BusID!!)
         if (foundBus != null) {
@@ -44,9 +47,11 @@ class BusMemStore : BusStore {
         }
     }
 
+    //to load the data from the database when the console starts
     override fun load(){
         buses = read()
     }
+
 
     internal fun logAll() {
         buses.forEach {

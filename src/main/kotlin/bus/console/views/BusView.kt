@@ -29,6 +29,8 @@ class BusView {
             -9
         return option
     }
+
+    // adding a bus entering the details
 fun addBusData(bus : BusModel) : Boolean {
     println("add bus")
     println()
@@ -47,6 +49,7 @@ fun addBusData(bus : BusModel) : Boolean {
     return bus.BusID !=null && bus.Route !=null && bus.Origin.isNotEmpty() && bus.Destination.isNotEmpty() && bus.Departuretime != null && bus.arrivaltime != null
 }
 
+    // listing the bus
     fun theBusesList(){
         //  return buses.findAll()
         println("List All buses")
@@ -54,7 +57,7 @@ fun addBusData(bus : BusModel) : Boolean {
         buses.logAll()
         println()
     }
-
+// deleting bus by busID
     fun deleteBus(): Int{
         println("delete bus")
         println()
@@ -62,7 +65,7 @@ fun addBusData(bus : BusModel) : Boolean {
         val busID = Integer.valueOf(readLine())
         return busID
     }
-
+//searching bus by route
     fun search(): Int{
         println("Search bus by Route")
         println()
@@ -71,7 +74,7 @@ fun addBusData(bus : BusModel) : Boolean {
         return route
 
     }
-
+//updating bus if the new values entered is not empty replace with old values
     fun updateBus(): BusModel? {
         val newRoute: Int?
         val newOrigin: String?
