@@ -1,6 +1,7 @@
 package bus.console.views
 
 import bus.console.HelperFile.read
+import bus.console.main.bus
 import bus.console.main.buses
 import bus.console.models.BusModel
 //import bus.console.models.BusJSONStore
@@ -12,13 +13,13 @@ class BusView {
         var input: String?
 
         println("Main Menu")
-        println(" 1. find bus by route ")
-        println(" 2. find bus by origin and destination ")
-        println(" 3. Buy ticket ")
-        println(" 4. search bus by routes ")
-        println(" 5. list all routes ")
-        println(" 6. list timetable based on Route ")
-        println(" 7. Delete Bus ")
+        println(" 0. Add Bus ")
+        println(" 1. List Buses")
+        println(" 2. Search Bus By Route")
+        println(" 3. Update Bus ")
+        println(" 4. Delete Bus")
+        println(" 5. ")
+        println(" 6. ")
         println("-1. Exit")
         println()
         print("Enter an integer : ")
@@ -43,9 +44,9 @@ fun addBusData(bus : BusModel) : Boolean {
     print("Enter bus destination")
     bus.Destination = readLine()!!
     print("Enter bus time of departure")
-    bus.Departuretime = Integer.valueOf(readLine())
-    print("Enter bus time of arrival")
-    bus.arrivaltime = Integer.valueOf(readLine())
+    bus.Departuretime = readLine()!!.toDouble() ?: 0.0
+        print("Enter bus time of arrival")
+    bus.arrivaltime = readLine()!!.toDouble()?: 0.0
     return bus.BusID !=null && bus.Route !=null && bus.Origin.isNotEmpty() && bus.Destination.isNotEmpty() && bus.Departuretime != null && bus.arrivaltime != null
 }
 
@@ -65,22 +66,13 @@ fun addBusData(bus : BusModel) : Boolean {
         val busID = Integer.valueOf(readLine())
         return busID
     }
-//searching bus by route
-    fun search(): Int{
-        println("Search bus by Route")
-        println()
-        print("search by Route")
-        val route = Integer.valueOf(readLine())
-        return route
-
-    }
 //updating bus if the new values entered is not empty replace with old values
     fun updateBus(): BusModel? {
         val newRoute: Int?
         val newOrigin: String?
         val newDestination: String?
-        val newDeparturetime: Int?
-        val newarrivaltime: Int?
+        val newDeparturetime: Double?
+        val newarrivaltime: Double?
         val bus=BusModel()
         println("Enter the BusID you want to update")
         bus.BusID = Integer.valueOf(readLine())
@@ -95,9 +87,9 @@ fun addBusData(bus : BusModel) : Boolean {
         print("Enter Destination")
         newDestination = readLine()
         print("Enter Departuretime")
-        newDeparturetime = Integer.valueOf(readLine())
+        newDeparturetime = readLine()!!.toDouble()
         print("Enter arrivaltime")
-        newarrivaltime = Integer.valueOf(readLine())
+        newarrivaltime = readLine()!!.toDouble()
 
         if(newRoute != null && newOrigin != null && newDestination != null && newDeparturetime != null && newarrivaltime != null){
             bus.Route = newRoute
@@ -108,7 +100,5 @@ fun addBusData(bus : BusModel) : Boolean {
             return bus
         }
         return null
-
-
     }
 }

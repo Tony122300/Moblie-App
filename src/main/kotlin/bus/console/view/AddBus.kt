@@ -2,6 +2,9 @@ package bus.console.view
 
 import bus.console.Database.Database
 import bus.console.main.bus
+import bus.console.main.buses
+import bus.console.models.BusModel
+import javafx.beans.property.SimpleDoubleProperty
 import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.scene.control.TextField
@@ -21,8 +24,8 @@ private var IDInt = SimpleIntegerProperty()
 private var RouteInt = SimpleIntegerProperty()
 private var OriginString = SimpleStringProperty()
 private var DestinationString = SimpleStringProperty()
-private var DeparturetimeINT = SimpleIntegerProperty()
-private var arrivaltimeINT = SimpleIntegerProperty()
+private var DeparturetimeDouble = SimpleDoubleProperty()
+private var arrivaltimeDouble =SimpleDoubleProperty()
 class AddBus : View("My View") {
     override val root = vbox(80) {
         label("add bus")
@@ -46,28 +49,30 @@ class AddBus : View("My View") {
 
                 }
                 field("Departure Time")
-                Departuretime = textfield(DeparturetimeINT) {
+                Departuretime = textfield(DeparturetimeDouble) {
 
                 }
                 field("Arrival time")
-                arrivaltime = textfield(arrivaltimeINT) {
+                arrivaltime = textfield(arrivaltimeDouble) {
 
                 }
                     }
             button ("adding bus"){
                 action{
-                    println(Destination.text)
-                    if(IDInt.value != null && RouteInt.value != null && OriginString.value.toString() != null && DestinationString.value.toString() != null && DeparturetimeINT.value != null && arrivaltimeINT.value != null){
-                        bus.BusID= IDInt.value
-                        bus.Route = RouteInt.value
-                        bus.Origin = OriginString.value
-                        bus.Destination = DestinationString.value
-                        bus.Departuretime = DeparturetimeINT.value
-                        bus.arrivaltime = arrivaltimeINT.value
+                    val aBus = BusModel(
+                        IDInt.value,
+                        RouteInt.value,
+                        OriginString.value,
+                        DestinationString.value,
+                        DeparturetimeDouble.value,
+                        arrivaltimeDouble.value
+                    )
+                    if(IDInt.value.toString() != "0" && RouteInt.value.toString() != "0" && OriginString.value != "" && DestinationString.value != "" && DeparturetimeDouble.value.toString() != "0.0" && arrivaltimeDouble.value.toString() !="0.0"){
+                    buses.create(aBus)
+                }
                     }
                 }
 
             }
         }
     }
-}

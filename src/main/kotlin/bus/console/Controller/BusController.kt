@@ -1,5 +1,6 @@
 package bus.console.Controller
 
+import bus.console.Database.Database
 import bus.console.HelperFile.read
 import bus.console.main.*
 import bus.console.models.BusMemStore
@@ -60,7 +61,34 @@ class BusController {
         if(bus != null)
             buses.update(busWithUpdates)
     }
-    //searching
-    fun searchBusByRoute(){
+    //searching from database had an error with searching from arraylist
+    fun searchBusByRoute(): List<BusModel> {
+        val conn = Database().conn
+        println("Search bus by Route")
+        println()
+        print("search by Route")
+        bus.Route = Integer.valueOf(readLine()) //version1
+        val ps = conn.prepareStatement("SELECT * FROM `businfo` WHERE Route = ?") //version1
+        ps.setInt(1, bus.Route) //version1
+        val resultSet = ps.executeQuery()
+        val busModels = ArrayList<BusModel>()
+        while (resultSet.next()) {
+            val BusID = resultSet.getInt("busID")
+            val Route = resultSet.getInt("Route")
+            val Origin = resultSet.getString("Origin")
+            val Destination = resultSet.getString("Destination")
+            val Departuretime = resultSet.getDouble("Departuretime")
+            val arrivaltime = resultSet.getDouble("arrivaltime")
+            val bus = BusModel(BusID, Route, Origin, Destination, Departuretime, arrivaltime)
+            busModels.add(bus)
+
+            // val routeNum = Integer.valueOf(readLine())  //version2
+            //     val ps = conn.prepareStatement("SELECT * FROM `businfo` WHERE Route = ${routeNum}")//version2
+            //run the query and get the resultset##
+            //loop through the resultset and print each route to the console
+        }
+        ps.close()
+        conn.close()
+        return busModels
     }
 }

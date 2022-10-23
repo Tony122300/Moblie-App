@@ -158,6 +158,7 @@ fun deleteBus(bus: BusModel){
     }
 
  */
+    /*
 fun searchBusByRoute(): List<BusModel> {
     val conn = Database().conn
     println("Search bus by Route or Origin")
@@ -187,5 +188,7 @@ fun searchBusByRoute(): List<BusModel> {
     conn.close()
     return busModels
 }
+
+     */
 }
 

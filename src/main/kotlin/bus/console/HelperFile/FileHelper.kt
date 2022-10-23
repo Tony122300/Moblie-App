@@ -39,8 +39,8 @@ fun read(): ArrayList<BusModel> {
             val Route = resultSet.getInt("Route")
             val Origin = resultSet.getString("Origin")
             val Destination = resultSet.getString("Destination")
-            val Departuretime = resultSet.getInt("Departuretime")
-            val arrivaltime = resultSet.getInt("arrivaltime")
+            val Departuretime = resultSet.getDouble("Departuretime")
+            val arrivaltime = resultSet.getDouble("arrivaltime")
             val bus = BusModel(BusID,Route,Origin,Destination,Departuretime,arrivaltime)
             busModels.add(bus)
         }
