@@ -14,7 +14,7 @@ import javax.print.attribute.standard.Destination
 private var ID: TextField by singleAssign()
 private var Route: TextField by singleAssign()
 private var Origin: TextField by singleAssign()
-//private var Destination: String = ""
+
 
 private var Destination: TextField by singleAssign()
 private var Departuretime: TextField by singleAssign()
@@ -33,26 +33,32 @@ class AddBus : View("My View") {
             setPrefSize(200.0,500.0)
             fieldset {
                 field("Bus ID")
+                //where the input goes
                 ID = textfield (IDInt){
 
                 }
                 field("Route")
+                //where the input goes
                 Route = textfield(RouteInt){
 
                 }
                 field("Origin")
+                //where the input goes
                 Origin = textfield(OriginString) {
 
                 }
                 field("Destination")
+                //where the input goes
                 Destination = textfield(DestinationString) {
 
                 }
                 field("Departure Time")
+                //where the input goes
                 Departuretime = textfield(DeparturetimeDouble) {
 
                 }
                 field("Arrival time")
+                //where the input goes
                 arrivaltime = textfield(arrivaltimeDouble) {
 
                 }
