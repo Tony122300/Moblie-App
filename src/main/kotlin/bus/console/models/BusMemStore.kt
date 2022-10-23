@@ -4,6 +4,8 @@ import bus.console.HelperFile.deleteBus
 import bus.console.HelperFile.read
 import bus.console.HelperFile.updateBus
 import bus.console.HelperFile.write
+import bus.console.main.bus
+import bus.console.main.busView
 import mu.KotlinLogging
 import kotlin.collections.ArrayList
 
@@ -57,5 +59,25 @@ class BusMemStore : BusStore {
         buses.forEach {
             logger.info("${it}")
         }
+    }
+
+    internal fun sort(){
+        val routes = mutableListOf<BusModel>()
+        buses.forEach{
+            routes.add(it)
+        }
+        routes.sortWith(compareBy{it.Route})
+        routes.forEach{
+            println(buses)
+        }
+    }
+
+    internal fun showallOriginToDestination(){
+        val origin = mutableListOf<BusModel>()
+        buses.forEach { origin.add(it)
+        println("origin : " + it.Origin + ", Destination : " + it.Destination )
+        }
+        origin.sortWith(compareBy{it.BusID})
+
     }
     }

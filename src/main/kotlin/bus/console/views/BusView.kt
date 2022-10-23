@@ -18,7 +18,7 @@ class BusView {
         println(" 2. Search Bus By Route")
         println(" 3. Update Bus ")
         println(" 4. Delete Bus")
-        println(" 5. ")
+        println(" 5. Sort by route smallest to largest")
         println(" 6. ")
         println("-1. Exit")
         println()

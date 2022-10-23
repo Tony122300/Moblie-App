@@ -13,7 +13,7 @@ private val logger = KotlinLogging.logger {}
 //val buses = ArrayList<BusModel>()
 val buses = BusMemStore()
 val busView = BusView()
-var bus = BusModel()
+val bus = BusModel()
 fun main(args: Array<String>) {
 
     println("bus app")

@@ -8,6 +8,7 @@ import bus.console.models.BusModel
 import bus.console.views.BusView
 
 class BusController {
+    var bus = BusModel()
     val buses = BusMemStore()
     val busView = BusView()
     fun start() {
@@ -22,8 +23,8 @@ class BusController {
                 2 -> searchBusByRoute()
                 3 -> updateBus()
                 4 -> deleteBus()
-                5 -> println("")
-                6 -> println("list")
+                5 -> sort()
+                6 -> filter()
                 7 -> deleteBus()
                 -1 -> println("Exiting App")
                 else -> println("Invalid Option")
@@ -90,5 +91,13 @@ class BusController {
         ps.close()
         conn.close()
         return busModels
+    }
+
+    fun sort(){
+        buses.sort()
+    }
+
+    fun filter(){
+        buses.showallOriginToDestination()
     }
 }
